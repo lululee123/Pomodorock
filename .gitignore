@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+DerivedData/
+build/
+
+# Swift Package Manager (checkouts are resolved locally; keep Package.resolved)
+.swiftpm/
+.build/
+
+# Firebase / secrets (see note in README before committing)
+# GoogleService-Info.plist
