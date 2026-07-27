@@ -10,13 +10,47 @@
 		692FDF993015E8FB00E85096 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 692FDF983015E8FB00E85096 /* FirebaseCore */; };
 		692FDF9B3015E94B00E85096 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 692FDF9A3015E94B00E85096 /* FirebaseFirestore */; };
 		692FDFA13015FD5200E85096 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 692FDFA03015FD5200E85096 /* FirebaseAuth */; };
+		900980FDEDABC6D4F3A645A9 /* PomodoroActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459AE8937DFBF69B612BA44 /* PomodoroActivityAttributes.swift */; };
+		1A2B3C4D5E6F7A8B9C0D1E2F /* PomodoroActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6459AE8937DFBF69B612BA44 /* PomodoroActivityAttributes.swift */; };
+		AFDD742C030014C53D8C4C64 /* PomodorockWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DD2A505DBD81BA33F39A61D6 /* PomodorockWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3A4B5DD0010D2855B8657CAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6915515E301345AC00194111 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2748DA097B6D63B264F07BB9;
+			remoteInfo = PomodorockWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5EE92E26326F46884F03B2DA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AFDD742C030014C53D8C4C64 /* PomodorockWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		6459AE8937DFBF69B612BA44 /* PomodoroActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PomodoroActivityAttributes.swift; path = Pomodorock/Shared/PomodoroActivityAttributes.swift; sourceTree = "<group>"; };
 		69155166301345AC00194111 /* Pomodorock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodorock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD2A505DBD81BA33F39A61D6 /* PomodorockWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomodorockWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		297353030D6E068D0F4FBDD5 /* PomodorockWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PomodorockWidget;
+			sourceTree = "<group>";
+		};
 		69155168301345AC00194111 /* Pomodorock */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Pomodorock;
@@ -25,6 +59,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		49867958DF69CBFCFB451280 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69155163301345AC00194111 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,12 +79,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F7A689F92C1A78B1077A965 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6459AE8937DFBF69B612BA44 /* PomodoroActivityAttributes.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		6915515D301345AC00194111 = {
 			isa = PBXGroup;
 			children = (
 				69155168301345AC00194111 /* Pomodorock */,
 				692FDF973015E8FB00E85096 /* Frameworks */,
 				69155167301345AC00194111 /* Products */,
+				297353030D6E068D0F4FBDD5 /* PomodorockWidget */,
+				4F7A689F92C1A78B1077A965 /* Shared */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				69155166301345AC00194111 /* Pomodorock.app */,
+				DD2A505DBD81BA33F39A61D6 /* PomodorockWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,6 +117,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2748DA097B6D63B264F07BB9 /* PomodorockWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 647FD1381239BB186910D78A /* Build configuration list for PBXNativeTarget "PomodorockWidget" */;
+			buildPhases = (
+				901EF672987177824761514B /* Sources */,
+				49867958DF69CBFCFB451280 /* Frameworks */,
+				3372D14CC37F4005A8C2FDF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				297353030D6E068D0F4FBDD5 /* PomodorockWidget */,
+			);
+			name = PomodorockWidget;
+			productName = PomodorockWidget;
+			productReference = DD2A505DBD81BA33F39A61D6 /* PomodorockWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		69155165301345AC00194111 /* Pomodorock */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69155171301345AD00194111 /* Build configuration list for PBXNativeTarget "Pomodorock" */;
@@ -72,10 +144,12 @@
 				69155162301345AC00194111 /* Sources */,
 				69155163301345AC00194111 /* Frameworks */,
 				69155164301345AC00194111 /* Resources */,
+				5EE92E26326F46884F03B2DA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BFC11291D17E944720EDD0C2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				69155168301345AC00194111 /* Pomodorock */,
@@ -100,6 +174,9 @@
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					2748DA097B6D63B264F07BB9 = {
+						CreatedOnToolsVersion = 26.6;
+					};
 					69155165301345AC00194111 = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -123,11 +200,19 @@
 			projectRoot = "";
 			targets = (
 				69155165301345AC00194111 /* Pomodorock */,
+				2748DA097B6D63B264F07BB9 /* PomodorockWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3372D14CC37F4005A8C2FDF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69155164301345AC00194111 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,12 +227,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2B3C4D5E6F7A8B9C0D1E2F /* PomodoroActivityAttributes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		901EF672987177824761514B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				900980FDEDABC6D4F3A645A9 /* PomodoroActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BFC11291D17E944720EDD0C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PomodorockWidget;
+			target = 2748DA097B6D63B264F07BB9 /* PomodorockWidget */;
+			targetProxy = 3A4B5DD0010D2855B8657CAB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		3B983ED0D5B8850CCA6F40C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7N98H453E5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "PomodorockWidget-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lulu-lee.Pomodorock.PomodorockWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6915516F301345AD00194111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -277,6 +409,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -321,6 +454,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -352,9 +486,47 @@
 			};
 			name = Release;
 		};
+		D7A7A97BA0E253640C8B2360 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7N98H453E5;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "PomodorockWidget-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lulu-lee.Pomodorock.PomodorockWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		647FD1381239BB186910D78A /* Build configuration list for PBXNativeTarget "PomodorockWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7A7A97BA0E253640C8B2360 /* Debug */,
+				3B983ED0D5B8850CCA6F40C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		69155161301345AC00194111 /* Build configuration list for PBXProject "Pomodorock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -5,12 +5,8 @@ import SwiftUI
 // MARK: - ContentView (主計時畫面與 Layout)
 struct ContentView: View {
     // --- 倒數計時狀態控制 ---
-    // 專注分鐘數，計時未開始時可點數字調整 (不持久化，重開回預設)
-    @State private var focusMinutes: Int = TimerConfig.focusMinutes
-    @State private var timeRemaining: TimeInterval = TimerConfig.focusDuration
-    @State private var isTimerRunning = false
-
-    private var totalTime: TimeInterval { Double(focusMinutes) * 60 }
+    @State private var pomodoroTimer = PomodoroTimerModel()
+    @Environment(\.scenePhase) private var scenePhase
 
     // 分鐘可選範圍 (自由選)
     private let minuteRange = 1...300
@@ -47,11 +43,6 @@ struct ContentView: View {
     private let tapQuoteDuration: TimeInterval = 3
     private let finishQuoteDuration: TimeInterval = 4
 
-    // 動態計算倒數進度比例 (1.0 -> 0.0)
-    var progress: Double {
-        return timeRemaining / totalTime
-    }
-
     var body: some View {
         ZStack {
             Color.appBackground
@@ -72,7 +63,7 @@ struct ContentView: View {
                             .frame(width: 270, height: 270)
 
                         Circle()
-                            .trim(from: 0, to: progress)
+                            .trim(from: 0, to: pomodoroTimer.progress)
                             .stroke(
                                 user.accent,
                                 style: StrokeStyle(
@@ -82,7 +73,7 @@ struct ContentView: View {
                             )
                             .frame(width: 270, height: 270)
                             .rotationEffect(.degrees(-90))
-                            .animation(.linear(duration: 1), value: progress)
+                            .animation(.linear(duration: 1), value: pomodoroTimer.progress)
                     }
 
                     ZStack {
@@ -124,7 +115,7 @@ struct ContentView: View {
 
                 if user.pomodoroMode {
                     VStack(spacing: 4) {
-                        if isTimerRunning {
+                        if pomodoroTimer.isRunning {
                             timeText
                         } else {
                             // 未開始：點數字用滾輪自由選擇分鐘數
@@ -136,7 +127,7 @@ struct ContentView: View {
                             .buttonStyle(.plain)
                         }
 
-                        Text(isTimerRunning ? user(.focusingSubtitle) : "")
+                        Text(pomodoroTimer.isRunning ? user(.focusingSubtitle) : "")
                             .font(.caption)
                             .foregroundColor(Color.appTextSecondary)
                     }
@@ -144,7 +135,7 @@ struct ContentView: View {
 
                     HStack(spacing: 16) {
                         // reset
-                        if !isTimerRunning {
+                        if !pomodoroTimer.isRunning {
                             Button(action: resetTimer) {
                                 Image(systemName: "arrow.triangle.2.circlepath")
                                     .font(.title3)
@@ -163,11 +154,11 @@ struct ContentView: View {
                         Button(action: toggleTimer) {
                             HStack {
                                 Image(
-                                    systemName: isTimerRunning
+                                    systemName: pomodoroTimer.isRunning
                                         ? "pause.fill" : "play.fill"
                                 )
                                 Text(
-                                    isTimerRunning
+                                    pomodoroTimer.isRunning
                                         ? user(.pause) : user(.startFocus)
                                 )
                             }
@@ -193,23 +184,19 @@ struct ContentView: View {
             sideMenuOverlay
         }
         .onReceive(timer) { _ in
-            guard isTimerRunning else { return }
-
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            } else {
-                timerFinished()
-            }
+            pomodoroTimer.tick()
         }
         .task {
+            pomodoroTimer.onFinish = { handleTimerFinished() }
+            NotificationService.requestAuthorizationIfNeeded()
             await user.start()
             await quoteStore.loadRemoteQuotes()
         }
         .preferredColorScheme(user.preferredColorScheme)
-        .onChange(of: focusMinutes) {
-            // 未開始時，調整分鐘數同步歸位剩餘時間
-            if !isTimerRunning {
-                timeRemaining = totalTime
+        .onChange(of: scenePhase) { _, newPhase in
+            // 從背景/鎖屏回到前景時立即校正，避免顯示卡在舊值
+            if newPhase == .active {
+                pomodoroTimer.tick()
             }
         }
         .sheet(isPresented: $showMinutePicker) {
@@ -258,8 +245,10 @@ struct ContentView: View {
 
     // 分鐘數滾輪選擇器
     private var minutePickerSheet: some View {
-        VStack(spacing: 16) {
-            Picker("", selection: $focusMinutes) {
+        @Bindable var pomodoroTimer = pomodoroTimer
+
+        return VStack(spacing: 16) {
+            Picker("", selection: $pomodoroTimer.focusMinutes) {
                 ForEach(minuteRange, id: \.self) { minutes in
                     Text(minuteLabel(minutes)).tag(minutes)
                 }
@@ -488,26 +477,18 @@ struct ContentView: View {
 
     private func toggleTimer() {
         withAnimation {
-            isTimerRunning.toggle()
+            pomodoroTimer.toggle(notificationTitle: user(.focusCompleted))
         }
     }
 
     private func resetTimer() {
         withAnimation {
-            isTimerRunning = false
-            timeRemaining = totalTime
+            pomodoroTimer.reset()
         }
     }
 
-    private func timerFinished() {
-        isTimerRunning = false
+    private func handleTimerFinished() {
         currentQuote = user(.focusCompleted)
-
-        var transaction = Transaction()
-        transaction.disablesAnimations = true
-        withTransaction(transaction) {
-            timeRemaining = totalTime
-        }
 
         Feedback.playCompletionSound()
 
@@ -541,7 +522,7 @@ struct ContentView: View {
 
     // 大字計時顯示
     private var timeText: some View {
-        Text(timeFormatted(timeRemaining))
+        Text(timeFormatted(pomodoroTimer.timeRemaining))
             .font(.system(size: 44, weight: .bold, design: .monospaced))
             .foregroundColor(Color.appTextPrimary)
     }
